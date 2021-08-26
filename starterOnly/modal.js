@@ -14,6 +14,8 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalHide = document.querySelectorAll(".close");
+
+const success = document.getElementById("success-message");
 // const qui vont chercher les input à tester ainsi que leurs error
 const first = document.getElementById("first");
 const firstError = document.getElementById("firstError");
@@ -40,7 +42,6 @@ const conditionError = document.getElementById("conditionError");
 function launchModal() {
   modalbg.style.display = "block";
 }
-
 // Close modal form
 function closeModal() {
   modalbg.style.display = "none";
@@ -52,10 +53,13 @@ function validationFirstName(e) {
   let value = e.target.value;
 
   if((value.length >= 2) && (value != "")) {
-    //console.log("Oui oui oui");
+    
     return true;
   }
-  //console.log("Non non non")
+  
+  firstError.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+  firstError.style.color = "red";
+  firstError.style.fontSize = "15px";
   return false;
 }
 
@@ -68,6 +72,9 @@ function validationLastName(e) {
     return true;
   } 
   //console.log("is not okay");
+  lastError.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+  lastError.style.color = "red";
+  lastError.style.fontSize = "15px";
   return false; 
 }
 
@@ -77,10 +84,10 @@ function validationEmail(e) {
   let validMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (value.match(validMail)) {
-    //console.log("is okay");
+    
     return true;
   } 
-  //console.log("is not okay");
+  
   return false; 
 }
 
@@ -93,10 +100,10 @@ function validationBirthDate() {
   let birthInput = new Date(birthdate.value);
 
   if (birthInput <= today) {
-    //console.log("TRUE")
+    
   	return true;
   } 
-  //console.log("FAUX")
+  
   return false;
 }
 
@@ -105,10 +112,10 @@ function validationQty(e) {
   let value = e.target.value;
 
   if ((isNaN(value)) || (value == "")) {
-    //console.log("is not okay");
+    
     return false;
   } 
-  //console.log("is okay");
+  
   return true;
 }
 
@@ -116,21 +123,62 @@ function validationButton() {
   
   if ((document.getElementById("location1").checked) || (document.getElementById("location2").checked) || (document.getElementById("location3").checked)
     || (document.getElementById("location4").checked) || (document.getElementById("location5").checked) || (document.getElementById("location6").checked)) {
-    //console.log("is okay");
+    
     return true;
   } 
-  //console.log("is not okay");
+  
   return false;
 }
 
 function validationCondition() {
 
   if (condition.checked) {
-    //console.log("is okay");
+    
     return true;
   } 
-  //console.log("is not okay");
+  
   return false;
+}
+
+// Function displaying the success message
+function isValid() {
+  // Will hide the form and display a success message 
+}
+
+// function submit validation
+function validate() {
+  let validForm = true;
+  if (!validationFirstName()) {
+    
+    validInput = false
+  }
+  if (!validationLastName()) {
+
+    validInput = false
+  }
+  if (!validationEmail()) {
+
+    validInput = false
+  }
+  if (!validationBirthDate()) {
+
+    validInput = false
+  }
+  if (validationQty()) {
+
+    validInput = false
+  }
+  if (!validationButton()) {
+
+    validInput = false
+  }
+  if (!validationCondition()) {
+
+    validInput = false
+  }
+  if (validForm) {
+    // Launch the isValid function
+  }
 }
 
 // When exiting the text field, start the function.
