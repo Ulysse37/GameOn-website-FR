@@ -39,6 +39,14 @@ const locationError = document.getElementById("locationError");
 const condition = document.getElementById("checkbox1");
 const conditionError = document.getElementById("conditionError");
 
+let validFormFirstName = false;
+let validFormLastName = false;
+let validFormEmail = false;
+let validFormBirthDate = false;
+let validFormQuantity = false;
+let validFormLocation = false;
+let validFormCondition = false;
+
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
@@ -54,15 +62,15 @@ function validationFirstName(e) {
   let value = e.target.value;
 
   if((value.length >= 2) && (value != "")) {
-    firstError.textContent = "";
     
-    return true;
+    firstError.textContent = "";
+    return validFormFirstName = true;
   }
   
   firstError.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
   firstError.style.color = "red";
   firstError.style.fontSize = "15px";
-  return false;
+  return validFormFirstName = false;
 }
 
 function validationLastName(e) {
@@ -72,12 +80,14 @@ function validationLastName(e) {
   if ((value.length >= 2) && (value != "")) {
     
     lastError.textContent = "";
+    validFormLastName = true;
     return true;
   } 
   
   lastError.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
   lastError.style.color = "red";
   lastError.style.fontSize = "15px";
+  validFormLastName = false;
   return false; 
 }
 
@@ -89,12 +99,14 @@ function validationEmail(e) {
   if (value.match(validMail)) {
     
     emailError.textContent = "";
+    validFormEmail = true;
     return true;
   } 
   
   emailError.textContent = "Veuillez entrer une adresse e-mail valide.";
   emailError.style.color = "red";
   emailError.style.fontSize = "15px";
+  validFormEmail = false;
   return false; 
 }
 
@@ -109,12 +121,14 @@ function validationBirthDate() {
   if (birthInput <= today) {
     
     birthdateError.textContent = "";
+    validFormBirthDate = true;
   	return true;
   } 
   
   birthdateError.textContent = "Veuillez entrer une date de naissance valide.";
   birthdateError.style.color = "red";
   birthdateError.style.fontSize = "15px";
+  validFormBirthDate = false;
   return false;
 }
 
@@ -127,10 +141,12 @@ function validationQty(e) {
     quantityError.textContent = "Veuillez entrer une valeur numérique.";
     quantityError.style.color = "red";
     quantityError.style.fontSize = "15px";
+    validFormQuantity = false;
     return false;
   } 
   
   quantityError.textContent = "";
+  validFormQuantity = true;
   return true;
 }
 
@@ -140,12 +156,14 @@ function validationButton() {
     || (document.getElementById("location4").checked) || (document.getElementById("location5").checked) || (document.getElementById("location6").checked)) {
     
     locationError.textContent = "";
+    validFormLocation = true;
     return true;
   } 
   
   locationError.textContent = "Vous devez choisir une option.";
   locationError.style.color = "red";
   locationError.style.fontSize = "15px";
+  validFormLocation = false;
   return false;
 }
 
@@ -154,12 +172,14 @@ function validationCondition() {
   if (condition.checked) {
     
     conditionError.textContent = "";
+    validFormCondition = true;
     return true;
   } 
   
   conditionError.textContent = "Vous devez vérifier que vous acceptez les termes et conditions.";
   conditionError.style.color = "red";
   conditionError.style.fontSize = "15px";
+  validFormCondition = false;
   return false;
 }
 
@@ -167,6 +187,7 @@ function validationCondition() {
 success.style.display = "none";
 // Function displaying the success message
 function isValid() {
+  console.log("isValid");
   form.style.display = "none"; 
   success.style.fontSize = "30px";
   success.style.textAlign = "center";
@@ -176,40 +197,11 @@ function isValid() {
 // function submit validation
 function validate() {
 
-  let validForm = true;
-  if (!validationFirstName()) {
-    
-    validForm = false
-  }
-  if (!validationLastName()) {
-
-    validForm = false
-  }
-  if (!validationEmail()) {
-
-    validForm = false
-  }
-  if (!validationBirthDate()) {
-
-    validForm = false
-  }
-  if (validationQty()) {
-
-    validForm = false
-  }
-  if (!validationButton()) {
-
-    validForm = false
-  }
-  if (!validationCondition()) {
-
-    validForm = false
-  }
-  if (validForm) {
-
+  if ((validFormFirstName == true) && (validFormLastName == true) && (validFormEmail == true) && (validFormBirthDate == true) && (validFormQuantity == true) && (validFormLocation == true) && (validFormCondition == true)) {
     isValid();
   }
 }
+
 
 // When exiting the text field, start the function.
 first.addEventListener('change', validationFirstName);
