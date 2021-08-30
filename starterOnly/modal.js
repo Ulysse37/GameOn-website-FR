@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 function editNav() {
   var x = document.getElementById("myTopnav");
@@ -15,7 +15,8 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalHide = document.querySelectorAll(".close");
 
-const success = document.getElementById("success-message");
+const success = document.getElementById("successMessage");
+const form = document.getElementById("reserve");
 // const qui vont chercher les input à tester ainsi que leurs error
 const first = document.getElementById("first");
 const firstError = document.getElementById("firstError");
@@ -30,7 +31,7 @@ const birthdate = document.getElementById("birthdate");
 const birthdateError = document.getElementById("birthdateError");
 
 const quantity = document.getElementById("quantity");
-const quantityError = document.getElementById("quantitytError");
+const quantityError = document.getElementById("quantityError");
 
 const locations = document.getElementsByName("location"); 
 const locationError = document.getElementById("locationError");
@@ -53,6 +54,7 @@ function validationFirstName(e) {
   let value = e.target.value;
 
   if((value.length >= 2) && (value != "")) {
+    firstError.textContent = "";
     
     return true;
   }
@@ -68,10 +70,11 @@ function validationLastName(e) {
   let value = e.target.value;
 
   if ((value.length >= 2) && (value != "")) {
-    //console.log("is okay");
+    
+    lastError.textContent = "";
     return true;
   } 
-  //console.log("is not okay");
+  
   lastError.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
   lastError.style.color = "red";
   lastError.style.fontSize = "15px";
@@ -85,9 +88,13 @@ function validationEmail(e) {
 
   if (value.match(validMail)) {
     
+    emailError.textContent = "";
     return true;
   } 
   
+  emailError.textContent = "Veuillez entrer une adresse e-mail valide.";
+  emailError.style.color = "red";
+  emailError.style.fontSize = "15px";
   return false; 
 }
 
@@ -101,9 +108,13 @@ function validationBirthDate() {
 
   if (birthInput <= today) {
     
+    birthdateError.textContent = "";
   	return true;
   } 
   
+  birthdateError.textContent = "Veuillez entrer une date de naissance valide.";
+  birthdateError.style.color = "red";
+  birthdateError.style.fontSize = "15px";
   return false;
 }
 
@@ -113,9 +124,13 @@ function validationQty(e) {
 
   if ((isNaN(value)) || (value == "")) {
     
+    quantityError.textContent = "Veuillez entrer une valeur numérique.";
+    quantityError.style.color = "red";
+    quantityError.style.fontSize = "15px";
     return false;
   } 
   
+  quantityError.textContent = "";
   return true;
 }
 
@@ -124,9 +139,13 @@ function validationButton() {
   if ((document.getElementById("location1").checked) || (document.getElementById("location2").checked) || (document.getElementById("location3").checked)
     || (document.getElementById("location4").checked) || (document.getElementById("location5").checked) || (document.getElementById("location6").checked)) {
     
+    locationError.textContent = "";
     return true;
   } 
   
+  locationError.textContent = "Vous devez choisir une option.";
+  locationError.style.color = "red";
+  locationError.style.fontSize = "15px";
   return false;
 }
 
@@ -134,50 +153,61 @@ function validationCondition() {
 
   if (condition.checked) {
     
+    conditionError.textContent = "";
     return true;
   } 
   
+  conditionError.textContent = "Vous devez vérifier que vous acceptez les termes et conditions.";
+  conditionError.style.color = "red";
+  conditionError.style.fontSize = "15px";
   return false;
 }
 
+// Hide success message by default
+success.style.display = "none";
 // Function displaying the success message
 function isValid() {
-  // Will hide the form and display a success message 
+  form.style.display = "none"; 
+  success.style.fontSize = "30px";
+  success.style.textAlign = "center";
+  success.style.display = "flex";
 }
 
 // function submit validation
 function validate() {
+
   let validForm = true;
   if (!validationFirstName()) {
     
-    validInput = false
+    validForm = false
   }
   if (!validationLastName()) {
 
-    validInput = false
+    validForm = false
   }
   if (!validationEmail()) {
 
-    validInput = false
+    validForm = false
   }
   if (!validationBirthDate()) {
 
-    validInput = false
+    validForm = false
   }
   if (validationQty()) {
 
-    validInput = false
+    validForm = false
   }
   if (!validationButton()) {
 
-    validInput = false
+    validForm = false
   }
   if (!validationCondition()) {
 
-    validInput = false
+    validForm = false
   }
   if (validForm) {
-    // Launch the isValid function
+
+    isValid();
   }
 }
 
