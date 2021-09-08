@@ -24,7 +24,7 @@ const birthdateError = document.getElementById("birthdateError");
 const quantity = document.getElementById("quantity");
 const quantityError = document.getElementById("quantityError");
 
-// const locations = document.getElementsByName("location"); 
+const locations = document.querySelectorAll("location");
 const location1 = document.getElementById("location1");
 const location2 = document.getElementById("location2");
 const location3 = document.getElementById("location3");
@@ -176,7 +176,8 @@ function isValid() {
   form.style.display = "none"; 
   success.style.fontSize = "30px";
   success.style.textAlign = "center";
-  success.style.display = "flex";
+  success.style.display = "block";
+  console.log("Is ok");
 }
 
 // function submit validation
@@ -187,9 +188,7 @@ function validate() {
   if (validForm) {
     isValid();
   }
-  form.style.display = "block";
 }
-
 
 // When exiting the text field, start the function.
 first.addEventListener('change', validationFirstName);
@@ -203,20 +202,11 @@ location3.addEventListener('change', validationButton);
 location4.addEventListener('change', validationButton);
 location5.addEventListener('change', validationButton);
 location6.addEventListener('change', validationButton);
-validationButton();
+//locations.addEventListener('change', validationButton);
 condition.addEventListener('change', validationCondition);
-
-
-
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // Close modal event
 modalHide.forEach((btn) => btn.addEventListener("click", closeModal));
-
-
-
-
-
-
