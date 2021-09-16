@@ -24,7 +24,7 @@ const birthdateError = document.getElementById("birthdateError");
 const quantity = document.getElementById("quantity");
 const quantityError = document.getElementById("quantityError");
 
-const locations = document.querySelectorAll("location");
+const locations = document.querySelectorAll("locations");
 const location1 = document.getElementById("location1");
 const location2 = document.getElementById("location2");
 const location3 = document.getElementById("location3");
@@ -183,6 +183,7 @@ function isValid() {
 // function submit validation
 
 function validate() {
+  event.preventDefault();
   let validForm = validFormFirstName && validFormLastName && validFormEmail && validFormBirthDate && validFormQuantity && validFormLocation && validFormCondition;
   console.log("validFormFirstName",validFormFirstName,"validFormLastName",validFormLastName,"validFormEmail",validFormEmail,"validFormBirthDate",validFormBirthDate,"validFormQuantity",validFormQuantity,"validFormLocation",validFormLocation,"validFormCondition",validFormCondition);
   if (validForm) {
