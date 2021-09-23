@@ -8,6 +8,7 @@ const modalHide = document.querySelectorAll(".close");
 
 const success = document.getElementById("successMessage");
 const form = document.getElementById("reserve");
+
 // const qui vont chercher les input à tester ainsi que leurs error
 const first = document.getElementById("first");
 const firstError = document.getElementById("firstError");
@@ -185,11 +186,11 @@ function validate() {
   if (validForm) {
     isValid();
   }
+  validationBirthDate();
+  validationButton();
+  validationCondition();
 }
 
-
-validationButton();
-validationCondition();
 // When exiting the text field, start the function.
 first.addEventListener('change', validationFirstName);
 last.addEventListener('change', validationLastName);
