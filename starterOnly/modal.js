@@ -64,10 +64,16 @@ function closeModal() {
 
 // Checking if each text field is valid.
 function validationFirstName(e) { 
-  
-  let value = e.target.value;
 
-  if((value.length >= 2) && (value != "")) {
+  let value;
+  //Si l'évenement lié à l'addeventlistener existe :
+  if (e) {
+    value = e.target.value;
+  } else { // s'il n'existe pas on définie value comme undefined;
+    value = undefined;
+  }
+
+  if(value && value.length >= 2) { // si value existe et que son nbre de caractères est >= à 2 : 
     firstError.textContent = "";
 
     return validFormFirstName = true;
@@ -81,9 +87,14 @@ function validationFirstName(e) {
 
 function validationLastName(e) {
 
-  let value = e.target.value;
+  let value;
+  if (e) {
+    value = e.target.value;
+  } else { 
+    value = undefined;
+  }
 
-  if ((value.length >= 2) && (value != "")) {
+  if (value && value.length >= 2) {
     lastError.textContent = "";
 
     return validFormLastName = true;
@@ -97,10 +108,16 @@ function validationLastName(e) {
 
 function validationEmail(e) {
   
-  let value = e.target.value;
+  let value;
+  if (e) {
+    value = e.target.value;
+  } else { 
+    value = undefined;
+  }
+
   let validMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (value.match(validMail)) {
+  if (value && value.match(validMail)) {
     emailError.textContent = "";
 
     return validFormEmail = true;
@@ -133,7 +150,12 @@ function validationBirthDate() {
 
 function validationQty(e) {
   
-  let value = e.target.value;
+  let value;
+  if (e) {
+    value = e.target.value;
+  } else { 
+    value = undefined;
+  }
 
   if ((isNaN(value)) || (value == "")) {
     quantityError.textContent = "Veuillez entrer une valeur numérique.";
@@ -195,7 +217,12 @@ function validate() {
   if (validForm) {
     isValid();
   }
+  
+  
+  validationLastName();
+  validationEmail();
   validationBirthDate();
+  //validationQty();
   validationButton();
   validationCondition();
 }
