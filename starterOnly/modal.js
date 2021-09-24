@@ -218,7 +218,7 @@ function validate() {
     isValid();
   }
   
-  
+  validationFirstName();
   validationLastName();
   validationEmail();
   validationBirthDate();
